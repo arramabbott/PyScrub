@@ -46,18 +46,18 @@ class PyScrubImg(Frame):
 		if inputFile != '':
 			imgFile = self.getImgData(self,inputFile)
 			
-	def OngetImgExifData(inputFile):
-		fileTypes = [('JPEG / JFIF','*.jpg'), ('All files', '*.*')]
-		dialog = tkFileDialog.Open(self, filetypes = fileTypes)
-		inputFile = dialog.show()
-		if inputFile != '':
-			data = {}
-			img = Image.open(inputFile)
-			info = img._getexif()
-			for tag, value in info.items():
-				decoded = TAGS.get(tag, tag)
-				data[decoded] = value
-			box.showinfo("Information" , data)
+    def OngetImgExifData(inputFile):
+	    fileTypes = [('JPEG / JFIF','*.jpg'), ('All files', '*.*')]
+	    dialog = tkFileDialog.Open(self, filetypes = fileTypes)
+	    inputFile = dialog.show()
+	    if inputFile != '':
+		    data = {}
+		    img = Image.open(inputFile)
+		    info = img._getexif()
+		    for tag, value in info.items():
+			    decoded = TAGS.get(tag, tag)
+			    data[decoded] = value
+		    box.showinfo("Information" , data)
 
     def onExit(self):
         self.quit()
