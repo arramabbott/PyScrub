@@ -32,32 +32,32 @@ class PyScrubImg(Frame):
             imgFile = self.cleanImg(inputFile)
 
     def cleanImg(self,fileName):
-		image = Image.open(fileName)
-		data = list(image.getdata())
-		cleanImg = Image.new(image.mode, image.size)
-		cleanImg.putdata(data)
-		cleanImg.save(fileName)
-		box.showinfo("Information", "Image " + str(fileName) + " cleaned")
-	
+        image = Image.open(fileName)
+        data = list(image.getdata())
+        cleanImg = Image.new(image.mode, image.size)
+        cleanImg.putdata(data)
+        cleanImg.save(fileName)
+        box.showinfo("Information", "Image " + str(fileName) + " cleaned")
+
     def OngetImgData(self):
-		fileTypes = [('Image Files', '*.jpg'), ('All files', '*.*')]
-		dialog = tkFileDialog.Open(self, filetypes = fileTypes)
-		inputFile = dialog.show()
-		if inputFile != '':
-			imgFile = self.getImgData(self,inputFile)
-			
-	def OngetImgExifData(inputFile):
-		fileTypes = [('JPEG / JFIF','*.jpg'), ('All files', '*.*')]
-		dialog = tkFileDialog.Open(self, filetypes = fileTypes)
-		inputFile = dialog.show()
-		if inputFile != '':
-			data = {}
-			img = Image.open(inputFile)
-			info = img._getexif()
-			for tag, value in info.items():
-				decoded = TAGS.get(tag, tag)
-				data[decoded] = value
-			box.showinfo("Information" , data)
+        fileTypes = [('Image Files', '*.jpg'), ('All files', '*.*')]
+        dialog = tkFileDialog.Open(self, filetypes = fileTypes)
+        inputFile = dialog.show()
+        if inputFile != '':
+            imgFile = self.getImgData(self,inputFile)
+
+    def OngetImgExifData(self):
+        fileTypes = [('JPEG / JFIF','*.jpg'), ('All files', '*.*')]
+        dialog = tkFileDialog.Open(self, filetypes = fileTypes)
+        inputFile = dialog.show()
+        if inputFile != '':
+            data = {}
+            img = Image.open(inputFile)
+            info = img._getexif()
+            for tag, value in info.items():
+                decoded = TAGS.get(tag, tag)
+                data[decoded] = value
+            box.showinfo("Information" , value)
 
     def onExit(self):
         self.quit()
